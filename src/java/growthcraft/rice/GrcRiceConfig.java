@@ -19,13 +19,6 @@ public class GrcRiceConfig extends ConfigBase
 	public int riceSakeDivineColor = 0xFFFACD;
 
 
-	@ConfigOption(catergory="Villager", name="Enabled", desc="Should we register Village Generation, and Villager Trades?")
-	public boolean enableVillageGen = true;
-
-	@ConfigOption(catergory="Village", name="Generate Village Rice Fields", desc="Should we spawn rice fields in villages?")
-	public boolean generateRiceFieldStructure;
-
-
 	@ConfigOption(catergory="Integration", name="Enable Forestry Integration", desc="Should we integrate with Forestry (if available)?")
 	public boolean enableForestryIntegration = true;
 

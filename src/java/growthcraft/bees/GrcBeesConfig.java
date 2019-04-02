@@ -40,17 +40,6 @@ public class GrcBeesConfig extends ConfigBase
 	@ConfigOption(catergory="Booze", name="Honey Mead Color", desc="What color should honey mead be?")
 	public int honeyMeadColor = 0xA3610C;
 
-
-	@ConfigOption(catergory="Village", name="Enabled", desc="Should we register Village Generation, and Villager Trades?")
-	public boolean enableVillageGen = true;
-
-	@ConfigOption(catergory="Village", name="Apiarist ID")
-	public int villagerApiaristID = 7766;
-
-	@ConfigOption(catergory="Village", name="Spawn Village Apiarist Structure", desc="Should the apiarist structure be generated in villages?")
-	public boolean generateApiaristStructure;
-
-
 	@ConfigOption(catergory="Integration", name="Enable Growthcraft Bamboo Integration", desc="Should we integrate with Growthcraft Bamboo (if available)?")
 	public boolean enableGrcBambooIntegration = true;
 
