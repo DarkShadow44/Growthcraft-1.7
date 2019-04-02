@@ -81,12 +81,6 @@ public class GrowthCraftHops
 	private void register()
 	{
 		modules.register();
-		CoreRegistry.instance().vineDrops().addDropEntry(items.hops.asStack(2), config.hopsVineDropRarity);
-
-		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(items.hops.asStack(), 1, 2, 10));
-		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(items.hops.asStack(), 1, 2, 10));
-
-		MapGenHelper.registerVillageStructure(ComponentVillageHopVineyard.class, "grc.hopvineyard");
 
 		//====================
 		// ORE DICTIONARY
@@ -109,19 +103,9 @@ public class GrowthCraftHops
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
-	private void initVillageHandlers()
-	{
-		final VillageHandlerHops handler = new VillageHandlerHops();
-		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
-		if (brewerID > 0)
-			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, handler);
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-	}
-
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 
