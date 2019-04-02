@@ -83,8 +83,6 @@ public class GrowthCraftRice
 		modules.register();
 		MinecraftForge.addGrassSeed(items.rice.asStack(), config.riceSeedDropRarity);
 
-		MapGenHelper.registerVillageStructure(ComponentVillageRiceField.class, "grc.ricefield");
-
 		//====================
 		// ORE DICTIONARY
 		//====================
@@ -104,20 +102,10 @@ public class GrowthCraftRice
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
-	private void initVillageHandlers()
-	{
-		final VillageHandlerRice handler = new VillageHandlerRice();
-		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
-		if (brewerID > 0)
-			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, handler);
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-	}
-
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.farmland, blocks.paddyField.getBlock());
-		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 
