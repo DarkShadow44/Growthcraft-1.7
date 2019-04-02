@@ -83,7 +83,6 @@ public class GrowthCraftApples
 
 	public void register()
 	{
-		MapGenHelper.registerVillageStructure(ComponentVillageAppleFarm.class, "grc.applefarm");
 
 		//====================
 		// CRAFTING
@@ -102,19 +101,9 @@ public class GrowthCraftApples
 		modules.register();
 	}
 
-	private void initVillageHandlers()
-	{
-		final VillageHandlerApples handler = new VillageHandlerApples();
-		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
-		if (brewerID > 0)
-			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, handler);
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-	}
-
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 
