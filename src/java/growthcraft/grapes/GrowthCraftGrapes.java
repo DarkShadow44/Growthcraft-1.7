@@ -91,10 +91,6 @@ public class GrowthCraftGrapes
 	{
 		modules.register();
 
-		CoreRegistry.instance().vineDrops().addDropEntry(items.grapes.asStack(), config.vineGrapeDropRarity);
-
-		MapGenHelper.registerVillageStructure(ComponentVillageGrapeVineyard.class, "grc.grapevineyard");
-
 		//====================
 		// ADDITIONAL PROPS.
 		//====================
@@ -125,21 +121,9 @@ public class GrowthCraftGrapes
 		NEI.hideItem(blocks.grapeLeaves.asStack());
 	}
 
-	private void initVillageHandlers()
-	{
-		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
-		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
-		if (brewerID > 0)
-			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, handler);
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-	}
-
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
-		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
-		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 
