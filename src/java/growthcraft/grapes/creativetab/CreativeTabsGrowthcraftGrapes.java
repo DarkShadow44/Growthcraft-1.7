@@ -41,6 +41,6 @@ public class CreativeTabsGrowthcraftGrapes extends CreativeTabs
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem()
 	{
-		return GrowthCraftGrapes.items.grapes.getItem();
+		return GrowthCraftGrapes.items.grapesStack.getItem();
 	}
 }

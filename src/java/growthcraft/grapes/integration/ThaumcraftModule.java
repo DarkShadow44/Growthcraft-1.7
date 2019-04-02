@@ -51,7 +51,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.blocks.grapeLeaves.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.items.grapeSeeds.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.items.grapes.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.CROP, 1).add(Aspect.HUNGER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.items.grapesStack, new AspectList().add(Aspect.CROP, 1).add(Aspect.HUNGER, 1));
 
 		final AspectList[] common = new AspectList[]
 		{

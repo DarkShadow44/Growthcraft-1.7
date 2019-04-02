@@ -85,7 +85,7 @@ public class BlockGrapeBlock extends GrcBlockBase
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.items.grapes.getItem();
+		return GrowthCraftGrapes.items.grapesStack.getItem();
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class BlockGrapeBlock extends GrcBlockBase
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return GrowthCraftGrapes.items.grapes.getItem();
+		return GrowthCraftGrapes.items.grapesStack.getItem();
 	}
 
 	@Override
@@ -116,11 +116,7 @@ public class BlockGrapeBlock extends GrcBlockBase
 		final int count = quantityDropped(metadata, fortune, world.rand);
 		for(int i = 0; i < count; ++i)
 		{
-			final Item item = getItemDropped(metadata, world.rand, fortune);
-			if (item != null)
-			{
-				ret.add(new ItemStack(item, 1, damageDropped(metadata)));
-			}
+			ret.add(GrowthCraftGrapes.items.grapesStack);
 			if (world.rand.nextInt(bayanusDropRarity) == 0)
 			{
 				ret.add(EnumYeast.BAYANUS.asStack(1));

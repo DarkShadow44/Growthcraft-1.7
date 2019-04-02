@@ -37,7 +37,7 @@ import net.minecraftforge.oredict.OreDictionary;
 	modid = GrowthCraftGrapes.MOD_ID,
 	name = GrowthCraftGrapes.MOD_NAME,
 	version = GrowthCraftGrapes.MOD_VERSION,
-	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@"
+	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@;required-after:gregtech"
 )
 public class GrowthCraftGrapes
 {
@@ -96,22 +96,22 @@ public class GrowthCraftGrapes
 		//====================
 		// ORE DICTIONARY
 		//====================
-		OreDictionary.registerOre("cropGrapes", items.grapes.getItem());
-		OreDictionary.registerOre("foodGrapes", items.grapes.getItem());
+		OreDictionary.registerOre("cropGrapes", items.grapesStack);
+		OreDictionary.registerOre("foodGrapes", items.grapesStack);
 		OreDictionary.registerOre("seedGrapes", items.grapeSeeds.getItem());
 		// For Pam's HarvestCraft
 		// Uses the same OreDict. names as HarvestCraft
-		OreDictionary.registerOre("cropGrape", items.grapes.getItem());
+		OreDictionary.registerOre("cropGrape", items.grapesStack);
 		OreDictionary.registerOre("seedGrape", items.grapeSeeds.getItem());
 		OreDictionary.registerOre("listAllseed", items.grapeSeeds.getItem());
-		OreDictionary.registerOre("listAllfruit", items.grapes.getItem());
+		OreDictionary.registerOre("listAllfruit", items.grapesStack);
 		//
-		OreDictionary.registerOre("foodFruit", items.grapes.getItem());
+		OreDictionary.registerOre("foodFruit", items.grapesStack);
 
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addShapelessRecipe(items.grapeSeeds.asStack(), items.grapes.getItem());
+		GameRegistry.addShapelessRecipe(items.grapeSeeds.asStack(), items.grapesStack);
 		NEI.hideItem(blocks.grapeVine0.asStack());
 		NEI.hideItem(blocks.grapeVine1.asStack());
 		NEI.hideItem(blocks.grapeBlock.asStack());

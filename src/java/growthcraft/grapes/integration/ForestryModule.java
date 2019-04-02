@@ -47,14 +47,11 @@ public class ForestryModule extends ForestryModuleBase
 		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
 
 		final ItemStack grapeSeed = GrowthCraftGrapes.items.grapeSeeds.asStack();
-		final ItemStack grapes = GrowthCraftGrapes.items.grapes.asStack();
 		final Block grapeBlock = GrowthCraftGrapes.blocks.grapeBlock.getBlock();
 
 		Backpack.FORESTERS.add(grapeSeed);
-		Backpack.FORESTERS.add(grapes);
 
 		if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager.addRecipe(10, new ItemStack[]{grapeSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
-		if (ForestryFluids.JUICE.exists()) recipes().squeezerManager.addRecipe(10, new ItemStack[]{grapes}, ForestryFluids.JUICE.asFluidStack(juiceAmount));
 		addFarmable("farmOrchard", new FarmableBasicGrowthCraft(grapeBlock, 0, false, true));
 	}
 }

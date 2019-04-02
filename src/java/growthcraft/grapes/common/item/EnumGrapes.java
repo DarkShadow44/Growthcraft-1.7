@@ -47,7 +47,8 @@ public enum EnumGrapes
 
 	public ItemStack asStack(int size)
 	{
-		return GrowthCraftGrapes.items.grapes.asStack(size, ordinal());
+		ItemStack old = GrowthCraftGrapes.items.grapesStack;
+		return new ItemStack(old.getItem(), size, old.getItemDamage());
 	}
 
 	public ItemStack asStack()
