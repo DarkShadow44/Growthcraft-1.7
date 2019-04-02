@@ -27,6 +27,7 @@ import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleItems;
 import growthcraft.hops.common.item.ItemHops;
 import growthcraft.hops.common.item.ItemHopSeeds;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class GrcHopsItems extends GrcModuleItems
 {
@@ -36,14 +37,13 @@ public class GrcHopsItems extends GrcModuleItems
 	@Override
 	public void preInit()
 	{
-		this.hops     = newDefinition(new ItemHops());
+		this.hops     = newDefinition(GameRegistry.findItem("IC2", "itemHops"));
 		this.hopSeeds = newDefinition(new ItemHopSeeds());
 	}
 
 	@Override
 	public void register()
 	{
-		hops.register("grc.hops");
 		hopSeeds.register("grc.hopSeeds");
 	}
 }
