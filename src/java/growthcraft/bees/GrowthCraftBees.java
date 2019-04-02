@@ -10,15 +10,8 @@ import growthcraft.api.core.item.recipes.ShapelessMultiRecipe;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
-import growthcraft.bees.client.eventhandler.GrcBeesHandleTextureStitch;
 import growthcraft.bees.common.CommonProxy;
-import growthcraft.bees.common.tileentity.TileEntityBeeBox;
-import growthcraft.bees.common.village.ComponentVillageApiarist;
-import growthcraft.bees.common.village.VillageHandlerBees;
-import growthcraft.bees.common.village.VillageHandlerBeesApiarist;
-import growthcraft.bees.common.world.WorldGeneratorBees;
 import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
-import growthcraft.bees.init.GrcBeesBlocks;
 import growthcraft.bees.init.GrcBeesFluids;
 import growthcraft.bees.init.GrcBeesItems;
 import growthcraft.bees.init.GrcBeesRecipes;
@@ -60,10 +53,8 @@ public class GrowthCraftBees
 	@Instance(MOD_ID)
 	public static GrowthCraftBees instance;
 	public static CreativeTabs tab;
-	public static final GrcBeesBlocks blocks = new GrcBeesBlocks();
 	public static final GrcBeesItems items = new GrcBeesItems();
 	public static final GrcBeesFluids fluids = new GrcBeesFluids();
-	public static final GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
 
 	private final ILogger logger = new GrcLogger(MOD_ID);
 	private final GrcBeesConfig config = new GrcBeesConfig();
@@ -71,7 +62,6 @@ public class GrowthCraftBees
 	private final UserBeesConfig userBeesConfig = new UserBeesConfig();
 	private final UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
 	private final GrcBeesRecipes recipes = new GrcBeesRecipes();
-	//private UserHoneyConfig userHoneyConfig = new UserHoneyConfig();
 
 	public static UserBeesConfig getUserBeesConfig()
 	{
@@ -96,7 +86,6 @@ public class GrowthCraftBees
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
-		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		modules.add(recipes);
@@ -110,13 +99,6 @@ public class GrowthCraftBees
 		//userHoneyConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/honey.json");
 		//modules.add(userHoneyConfig);
 
-		if (config.enableGrcBambooIntegration) modules.add(new growthcraft.bees.integration.GrcBambooModule());
-		if (config.enableGrcNetherIntegration) modules.add(new growthcraft.bees.integration.GrcNetherModule());
-		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
-		if (config.enableBoPIntegration) modules.add(new growthcraft.bees.integration.BoPModule());
-		if (config.enableNaturaIntegration) modules.add(new growthcraft.bees.integration.NaturaModule());
-		if (config.enableBotaniaIntegration) modules.add(new growthcraft.bees.integration.BotaniaModule());
-		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
 		modules.add(CommonProxy.instance);
 		if (config.debugEnabled)
@@ -127,8 +109,6 @@ public class GrowthCraftBees
 		modules.freeze();
 		tab = new CreativeTabsGrowthcraftBees("creative_tab_grcbees");
 
-		MinecraftForge.EVENT_BUS.register(new GrcBeesHandleTextureStitch());
-
 		modules.preInit();
 		register();
 	}
@@ -136,73 +116,13 @@ public class GrowthCraftBees
 	private void register()
 	{
 		// TileEntities
-		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
-		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
-		MapGenHelper.registerVillageStructure(ComponentVillageApiarist.class, "grc.apiarist");
 		modules.register();
-		registerRecipes();
-		userBeesConfig.addDefault(items.bee.asStack()).setComment("Growthcraft's default bee");
-		BeesRegistry.instance().addHoneyComb(items.honeyCombEmpty.asStack(), items.honeyCombFilled.asStack());
-		userFlowersConfig.addDefault(Blocks.red_flower);
-		userFlowersConfig.addDefault(Blocks.yellow_flower);
-		if (BopPlatform.isLoaded())
-		{
-			userFlowersConfig.addDefault(
-				new UserFlowerEntry("BiomesOPlenty", "flowers", OreDictionary.WILDCARD_VALUE)
-					.setEntryType("forced"))
-				.setComment("BiomesOPlenty flowers require a forced entry, in order for it to be placed by the bee box spawning.");
-			userFlowersConfig.addDefault(
-				new UserFlowerEntry("BiomesOPlenty", "flowers2", OreDictionary.WILDCARD_VALUE)
-					.setEntryType("forced"))
-				.setComment("BiomesOPlenty flowers require a forced entry, in order for it to be placed by the bee box spawning.");
-		}
 	}
 
-	private void registerRecipes()
-	{
-		final BlockDefinition planks = new BlockDefinition(Blocks.planks);
-		for (int i = 0; i < 6; ++i)
-		{
-			GameRegistry.addRecipe(blocks.beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
-		}
-
-		final ItemStack honeyStack = items.honeyCombFilled.asStack();
-		GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
-			honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
-	}
-
-	private void postRegisterRecipes()
-	{
-		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
-
-		GameRegistry.addRecipe(new ShapelessMultiRecipe(
-				items.honeyJar.asStack(),
-				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
-				Items.flower_pot));
-	}
-
-	private void initVillageHandlers()
-	{
-		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
-		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
-		final int apiaristID = config.villagerApiaristID;
-		if (apiaristID > 0)
-		{
-			VillagerRegistry.instance().registerVillagerId(apiaristID);
-			VillagerRegistry.instance().registerVillageTradeHandler(apiaristID, handler);
-		}
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-		if (brewerID > 0)
-		{
-			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, new VillageHandlerBees());
-		}
-	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProvider);
-		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 
@@ -211,7 +131,6 @@ public class GrowthCraftBees
 	{
 		userBeesConfig.loadUserConfig();
 		userFlowersConfig.loadUserConfig();
-		postRegisterRecipes();
 
 		modules.postInit();
 	}

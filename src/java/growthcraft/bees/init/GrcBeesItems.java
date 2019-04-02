@@ -23,12 +23,7 @@
  */
 package growthcraft.bees.init;
 
-import growthcraft.bees.common.item.EnumBeesWax;
 import growthcraft.bees.common.item.ItemBee;
-import growthcraft.bees.common.item.ItemBeesWax;
-import growthcraft.bees.common.item.ItemHoneyCombEmpty;
-import growthcraft.bees.common.item.ItemHoneyCombFilled;
-import growthcraft.bees.common.item.ItemHoneyJar;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleItems;
 
@@ -45,38 +40,12 @@ public class GrcBeesItems extends GrcModuleItems
 	@Override
 	public void preInit()
 	{
-		this.honeyCombEmpty = newDefinition(new ItemHoneyCombEmpty());
-		this.honeyCombFilled = newDefinition(new ItemHoneyCombFilled());
-		this.honeyJar = newDefinition(new ItemHoneyJar());
 		this.bee = newDefinition(new ItemBee());
-		this.beesWax = newDefinition(new ItemBeesWax());
 	}
 
 	@Override
 	public void register()
 	{
-		honeyCombEmpty.register("grc.honeyCombEmpty");
-		honeyCombFilled.register("grc.honeyCombFilled");
-		honeyJar.register("grc.honeyJar");
 		bee.register("grc.bee");
-		beesWax.register("grcbees.BeesWax");
-	}
-
-	@Override
-	public void init()
-	{
-		OreDictionary.registerOre("materialWax", beesWax.getItem());
-		OreDictionary.registerOre("materialPressedwax", beesWax.getItem());
-		OreDictionary.registerOre("materialBeeswax", beesWax.getItem());
-		OreDictionary.registerOre("materialBeeswaxBlack", EnumBeesWax.BLACK.asStack());
-		OreDictionary.registerOre("materialBeeswaxRed", EnumBeesWax.RED.asStack());
-		OreDictionary.registerOre("beeQueen", bee.getItem());
-		OreDictionary.registerOre("materialWaxcomb", honeyCombEmpty.asStack());
-		OreDictionary.registerOre("beeComb", honeyCombEmpty.asStack());
-		OreDictionary.registerOre("materialHoneycomb", honeyCombFilled.asStack());
-		OreDictionary.registerOre("beeComb", honeyCombFilled.asStack());
-		OreDictionary.registerOre("honeyDrop", honeyJar.getItem());
-		OreDictionary.registerOre("dropHoney", honeyJar.getItem());
-		OreDictionary.registerOre("bucketHoney", honeyJar.getItem());
 	}
 }

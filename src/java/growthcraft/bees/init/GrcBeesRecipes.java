@@ -32,7 +32,6 @@ import growthcraft.api.core.fluids.TaggedFluidStacks;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.item.recipes.ShapelessMultiRecipe;
 import growthcraft.api.core.util.TickUtils;
-import growthcraft.bees.common.item.EnumBeesWax;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
@@ -123,18 +122,6 @@ public class GrcBeesRecipes extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		final ItemStack emptyComb = GrowthCraftBees.items.honeyCombEmpty.asStack();
-		GameRegistry.addShapelessRecipe(EnumBeesWax.NORMAL.asStack(),
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb);
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.BLACK.asStack(),
-			EnumBeesWax.NORMAL.asStack(), "dyeBlack"));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.RED.asStack(),
-			EnumBeesWax.NORMAL.asStack(), "dyeRed"));
-
 		registerCellarRecipes();
 	}
 
@@ -181,20 +168,6 @@ public class GrcBeesRecipes extends GrcModuleBase
 			Items.glass_bottle,
 			new OreItemStacks("bottleHoney"),
 			new FluidStack(FluidRegistry.WATER, bottleCapacity)));
-
-		// Transfer recipes
-		/// To Honey Jar from `bucketHoney`
-		GameRegistry.addRecipe(new ShapelessMultiRecipe(
-			GrowthCraftBees.items.honeyJar.asStack(),
-			Blocks.flower_pot,
-			new TaggedFluidStacks(1000, "honey")
-		));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(
-			GrowthCraftBees.items.honeyJar.asStack(),
-			Blocks.flower_pot,
-			"bucketHoney"
-		));
 
 		/// To Honey Bucket from `bucketHoney`
 		GameRegistry.addRecipe(new ShapelessMultiRecipe(
